@@ -2,6 +2,8 @@
 
 Mac'te çalışan FastAPI sunucusu. PC'deki Ollama'ya (Qwen3 8B) HTTP ile bağlanır; ileride RAG ve kişilik katmanı buraya eklenecek.
 
+Masaüstü istemci: [Chibi](../chibi) — sol tık chat paneli, sağ tık poke.
+
 ## Kurulum
 
 ```bash
@@ -28,6 +30,22 @@ Sohbet testi:
 curl -X POST http://localhost:8000/chat \
   -H "Content-Type: application/json" \
   -d '{"message": "Merhaba, kısaca kendini tanıt"}'
+```
+
+Stream (NDJSON):
+
+```bash
+curl -N -X POST http://localhost:8000/chat/stream \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Merhaba"}'
+```
+
+**Topology:** API + Ollama PC'de çalışır; Mac sadece istemci (Chibi).
+
+Chibi varsayılan: `http://192.168.1.233:8000`. Override:
+
+```bash
+defaults write com.talo.ChibiNative API_URL "http://pc-ip:8000"
 ```
 
 ## Ortam değişkenleri
